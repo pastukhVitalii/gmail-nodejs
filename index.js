@@ -40,7 +40,7 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
-app.get('/sendMessage', async (req, res) => {
+app.post('/sendMessage', async (req, res) => {
 
     // send mail with defined transport object
     let info = await transporter.sendMail({
