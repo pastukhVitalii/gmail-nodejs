@@ -1,9 +1,12 @@
 const express = require('express');
 const nodemailer = require("nodemailer");
 const cors = require('cors');
+const bodyParser = require('body-parser');
 
 const app = express();
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false}));
+app.use(bodyParser.json());
 
 // const port = 3010;
 
@@ -42,16 +45,27 @@ app.get('/', (req, res) => {
 
 app.post('/sendMessage', async (req, res) => {
 
+    let {name, email, message} = req.body;
     // send mail with defined transport object
     let info = await transporter.sendMail({
         from: 'Vitaliy', // sender address
         to: 'pastukh.v.7@gmail.com', // list of receivers
         subject: "testing gmail", // Subject line
        // text: "Hello world? (text)", // plain text body
-        html: "<b>Hello world?</b>", // html body
+        html: `<b>Messages </b>
+        <div>
+            name: ${name}
+        </div>
+        <div>
+            email: ${email}
+        </div>
+        <div>
+            message: ${message}
+        </div>`
     });
 
-    res.send('Hello World again!')
+    // res.send('Hello World again!')
+    res.send('ok');
 })
 
 app.listen(port, () => {
