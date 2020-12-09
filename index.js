@@ -1,7 +1,9 @@
 const express = require('express');
 const nodemailer = require("nodemailer");
-const app = express()
-const port = 3010
+const app = express();
+// const port = 3010;
+
+let port = process.env.PORT || 3010;
 
 /*фронтенд не може відправляти листи !! Він може зробити запит на сервер а той в свою чергу
 робить запит на інший поштовий сервер (джмейл).Запити з сервера на сервер робляться за допомогою nodemailer*/
@@ -10,6 +12,9 @@ const port = 3010
 // SMTP  відправка на сервер
 // create reusable transporter object using the default SMTP transport
 // async function main() {
+
+let smtp_login = process.env.SMTP_LOGIN || "---";
+let smtp_password = process.env.SMTP_PASSWORD || "---";
 let transporter = nodemailer.createTransport({
 
     service: 'gmail',
@@ -17,12 +22,12 @@ let transporter = nodemailer.createTransport({
     port: 25, //587,
     secure: false, // true for 465, false for other ports
     tls: {
-        
+
         // --unhandledrejection=strict
     },*/
     auth: {
-        user: , // generated ethereal user
-        pass: , // generated ethereal password
+        user: smtp_login, // generated ethereal user
+        pass: smtp_password, // generated ethereal password
     },
 });
 
