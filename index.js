@@ -42,12 +42,11 @@ let transporter = nodemailer.createTransport({
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
-
-app.post('/sendMessage', async (req, res) => {
+app.post('/sendMessage',  (req, res) => {
 
     let {name, email, message} = req.body;
     // send mail with defined transport object
-    let info = await transporter.sendMail({
+    let info =  transporter.sendMail({
         from: 'Vitaliy', // sender address
         to: 'pastukh.v.7@gmail.com', // list of receivers
         subject: "testing gmail", // Subject line
