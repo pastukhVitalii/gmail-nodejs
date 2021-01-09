@@ -33,6 +33,7 @@ let transporter = nodemailer.createTransport({
         // --unhandledrejection=strict
     },*/
     auth: {
+        type: "login",
         user: smtp_login, // generated ethereal user
         pass: smtp_password, // generated ethereal password
     },
@@ -74,3 +75,32 @@ app.listen(port, () => {
 process.on('unhandledRejection', (reason, p) => {
     console.log('!!! UnhandledRejection: ', reason, p) // need log always
 })
+
+
+/*
+const transporter = nodeMailer.createTransport({
+    service: "gmail",
+    auth: {
+        type: "login",
+        user: process.env.GMAIL_USER || GMAIL_USER,
+        pass: process.env.GMAIL_PASS || GMAIL_PASS
+    }
+});
+
+export const sendMail = async (from: string, to: string, subject: string, html?: string, text?: string) => {
+
+    // for accept
+    // https://myaccount.google.com/lesssecureapps
+    const info = await transporter.sendMail({
+        from,
+        to,
+        subject,
+        text,
+        html: text ? undefined : html,
+    });
+
+    if (DEV_VERSION) console.log("gmail info: ", info);
+
+    return info;
+};
+*/
