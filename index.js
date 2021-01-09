@@ -70,3 +70,7 @@ app.post('/sendMessage',async (req, res) => {
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
+
+process.on('unhandledRejection', (reason, p) => {
+    console.log('!!! UnhandledRejection: ', reason, p) // need log always
+})
